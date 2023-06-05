@@ -1,0 +1,14 @@
+{
+  "name": "acs-accessibility",
+  "version": "1.0.0",
+  "description": "ACS Accessibility Test",
+  "scripts": {
+    "start": "http-server ."
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "npm": "^8.11.0"
+  }
+}
