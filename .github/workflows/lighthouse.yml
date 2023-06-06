@@ -9,13 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Use Node.js 16.x
+      - name: Use NodeJS 16.x
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
       - run: |
           npm install
-          npm build
+          npm run build
       - name: Run Lighthouse
         run: |
           npm install -g @lhci/cli@0.7.x
