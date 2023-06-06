@@ -1,4 +1,7 @@
 name: pa11y
+on:
+  push:
+    branches: [main]
 
 jobs:
   pa11y:
