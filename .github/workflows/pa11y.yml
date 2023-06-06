@@ -1,4 +1,3 @@
-// .github/workflows/pa11y.yaml
 name: pa11y
 on:
   push:
