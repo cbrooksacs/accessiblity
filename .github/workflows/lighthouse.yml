@@ -10,14 +10,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 16.x
-      - name: npm install, build
-        run: |
+      - run: |
           npm install
           npm run build
-      - name: run Lighthouse CI
+      - name: Run Lighthouse
         run: |
           npm install -g @lhci/cli@0.7.x
           lhci autorun
