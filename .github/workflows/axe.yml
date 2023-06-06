@@ -14,8 +14,8 @@ jobs:
         uses: actions/setup-node@v3
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm start & npx wait-on http://localhost:3000
+      - run: npm start & npx wait-on https://cbrooksacs.github.io/accessiblity/
       - name: Run axe
         run: |
           npm install -g @axe-core/cli
-          axe http://localhost:3000 --exit
+          axe https://cbrooksacs.github.io/accessiblity/ --exit
