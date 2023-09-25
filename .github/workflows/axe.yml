@@ -18,8 +18,7 @@ jobs:
       - name: Run axe
         run: |
           npm install -g @axe-core/cli
-          npm install -g chromedriver
-          axe https://cbrooksacs.github.io/accessiblity/ --chromedriver-path="./node_modules/chromedriver" --exit
+          axe https://cbrooksacs.github.io/accessiblity/ --browser firefox --exit
           
           
     
