@@ -12,7 +12,7 @@ jobs:
         uses: actions/setup-node@v3
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm install -g webdriver-manager
+      - run: npm install -g chromedriver
       - run: npm start & npx wait-on https://cbrooksacs.github.io/accessiblity/
       - name: Run axe
         run: |
