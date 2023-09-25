@@ -10,8 +10,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Use Node.js 12.x
         uses: actions/setup-node@v1
-          with:
-            node-version: 12.x
+        with:
+          node-version: 12.x
       - run: npm ci
       - run: npm run build --if-present
       - run: npm start & npx wait-on https://cbrooksacs.github.io/accessiblity/
@@ -19,3 +19,6 @@ jobs:
         run: |
           npm install -g @axe-core/cli
           axe https://cbrooksacs.github.io/accessiblity/ --exit
+          
+          
+    
