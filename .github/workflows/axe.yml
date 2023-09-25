@@ -17,7 +17,7 @@ jobs:
       - run: npm start & npx wait-on https://cbrooksacs.github.io/accessiblity/
       - name: Run axe
         run: |
-          npm i axe-core
+          npm i @axe-core/cli
           axe https://cbrooksacs.github.io/accessiblity/ --exit
           
           
