@@ -18,7 +18,7 @@ jobs:
       - name: Run axe
         run: |
           npm i @axe-core/cli
-          axe https://cbrooksacs.github.io/accessiblity/ --exit
+          axe https://cbrooksacs.github.io/accessiblity/ --chromedriver-path /usr/local/bin/chromedriver --exit
           
           
     
