@@ -15,7 +15,7 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm start & npx wait-on https://cbrooksacs.github.io/accessiblity/
-      - name: Run axe
+      - name: Run axe --chromedriver-path="https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/117.0.5938.92/mac-arm64/chrome-mac-arm64.zip"
         run: |
           npm install -g @axe-core/cli
           axe https://cbrooksacs.github.io/accessiblity/ --exit
