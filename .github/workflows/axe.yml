@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Run axe
         run:
-          npm install axe-cli -g
+          npm i @axe-core/cli
           axe https://cbrooksacs.github.io/accessiblity/ --exit
           
           
