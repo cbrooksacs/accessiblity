@@ -8,6 +8,6 @@ jobs:
      - name: Audit URLs using Lighthouse
        uses: treosh/lighthouse-ci-action@v7
        with:
-         urls: https://cbrooksacs.github.io/accessiblity/
+         urls: https://cbrooksacs.github.io/accessiblity
          uploadArtifacts: true # save results as an action artifacts
          temporaryPublicStorage: true # upload lighthouse audits to google temporary storage
