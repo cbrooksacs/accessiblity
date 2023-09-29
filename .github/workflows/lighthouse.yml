@@ -9,4 +9,8 @@ jobs:
       uses: treosh/lighthouse-ci-action@v3
       with:
         urls: |
-          https://cbrooksacs.github.io/accessiblity/
+              https://example.com/
+              https://example.com/blog
+        budgetPath: ./budget.json # test performance budgets
+        uploadArtifacts: true # save results as an action artifacts
+        temporaryPublicStorage: true # upload lighthouse report
