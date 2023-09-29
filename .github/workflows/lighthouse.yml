@@ -4,10 +4,10 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latestt
     steps:
-      - name: Run Lighthouse on urls and validate with lighthouserc
-      - uses: actions/checkout@v3
-        uses: treosh/lighthouse-ci-action@v7
-        with:
-          urls: https://cbrooksacs.github.io/accessiblity/
-          uploadArtifacts: true # save results as an action artifacts
-          temporaryPublicStorage: true # upload lighthouse audits to google temporary storage
+     - uses: actions/checkout@v2
+     - name: Audit URLs using Lighthouse
+       uses: treosh/lighthouse-ci-action@v7
+       with:
+         urls: https://cbrooksacs.github.io/accessiblity/
+         uploadArtifacts: true # save results as an action artifacts
+         temporaryPublicStorage: true # upload lighthouse audits to google temporary storage
