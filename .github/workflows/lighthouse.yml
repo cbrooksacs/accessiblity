@@ -1,13 +1,22 @@
 name: Lighthouse
 on: push
 jobs:
-  lighthouse:
+  lhci:
+    name: Lighthouse
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Audit URLs using Lighthouse
-        uses: treosh/lighthouse-ci-action@v10
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Set up Node.js 12.x
+        uses: actions/setup-node@v1
         with:
-          urls: |
-            https://example.com/
-            https://example.com/blog
+          node-version: 12.x
+      - name: Install dependencies and build
+        run: |
+          npm install
+          npm run build
+      - name: Test site with Lighthouse CI
+        run: |
+          npm run generate # Or whatever will build the project
+          npm install -g @lhci/cli@0.7.x
+          lhci autorun
