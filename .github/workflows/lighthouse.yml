@@ -8,4 +8,4 @@ jobs:
       - name: Audit URLs using Lighthouse
         uses: treosh/lighthouse-ci-action@v2
         with:
-          urls: 'https://cbrooksacs.github.io/accessiblity/'
+          urls: ${{ steps.deployment.outputs.page_url }}
