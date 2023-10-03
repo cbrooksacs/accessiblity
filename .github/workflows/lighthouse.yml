@@ -9,5 +9,5 @@ jobs:
         id: lighthouse
         with:
           urls: |
-            ${{ steps.project.outputs.site-url }}
+            https://cbrooksacs.github.io/accessiblity/
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
