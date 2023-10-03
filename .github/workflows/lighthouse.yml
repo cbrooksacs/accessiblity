@@ -1,18 +1,19 @@
-name: Lighthouse CI
+name: Lighthouse Check
 on: push
+
 jobs:
- lighthouse:
-   runs-on: ubuntu-latest
-   steps:
-     - uses: actions/checkout@v2
-     - name: Setup node
-       uses: actions/setup-node@v1
-       with:
-         node-version: "14.x"
-     - name: Install
-     - run: npm ci
-     - run: npm i -g http-server @lhci/cli
-     - name: Build
-     - run: npm run build
-     - name: LighthouseCI
-     - run: lhci autorun
+  lighthouse-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - run: mkdir /tmp/artifacts
+    - name: Run Lighthouse
+      uses: foo-software/lighthouse-check-action@master
+      with:
+        outputDirectory: /tmp/artifacts
+        urls: 'https://www.foo.software,https://www.foo.software/contact'
+    - name: Upload artifacts
+      uses: actions/upload-artifact@master
+      with:
+        name: Lighthouse reports
+        path: /tmp/artifacts
