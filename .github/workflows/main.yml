@@ -67,10 +67,9 @@ jobs:
           inputs:
             device: "all"
           with:
-            urls: 'https://cbrooksacs.github.io/accessiblity/'
+            urls: "https://cbrooksacs.github.io/accessiblity/"
         - name: Verify Lighthouse Check results
           uses: foo-software/lighthouse-check-status-action@master
-
           with:
             lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
             minAccessibilityScore: "90"
