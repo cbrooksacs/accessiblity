@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   # Single deploy job since we're just deploying
-  Deploy:
+  deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -41,7 +41,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-  Axe:
+  axe:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -57,17 +57,15 @@ jobs:
         run: |
           npm install -g @axe-core/cli
           axe https://cbrooksacs.github.io/accessiblity/ --chromedriver-path="/bin/chromedriver" --exit
-  Lighthouse:
+  lighthouse:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
-        - run: mkdir -p ${{ github.workspace }}/tmp/artifacts
         - name: Lighthouse
           uses: foo-software/lighthouse-check-action@master
           id: lighthouseCheck
           with:
             device: "all"
-            outputDirectory: ${{ github.workspace }}/tmp/artifacts
             urls: "https://cbrooksacs.github.io/accessiblity/"
         - name: Verify Lighthouse Check results
           uses: foo-software/lighthouse-check-status-action@master
@@ -78,3 +76,19 @@ jobs:
             minPerformanceScore: "50"
             minProgressiveWebAppScore: "50"
             minSeoScore: "50"
+  pa11y:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm start & npx wait-on https://cbrooksacs.github.io/accessiblity/
+      - name: Run pa11y
+        run: |
+          npm install -g pa11y
+          pa11y --runner axe --runner htmlcs https://cbrooksacs.github.io/accessiblity/ --timeout 500000 --ignore issue-code-1
+
