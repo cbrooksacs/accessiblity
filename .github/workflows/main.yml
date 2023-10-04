@@ -41,13 +41,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-
-name: Axe Accessibility Test
-on:
-  push:
-    branches: [main]
-
-jobs:
   Run Axe Accesbility Test:
     runs-on: ubuntu-latest
     steps:
