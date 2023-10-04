@@ -58,7 +58,7 @@ jobs:
       - name: Run axe
         run: |
           npm install -g @axe-core/cli
-          axe ${{ env.ACS_WEBSITE }} --chromedriver-path="/bin/chromedriver --exit
+          axe ${{ env.ACS_WEBSITE }} --chromedriver-path="/bin/chromedriver" --exit
   lighthouse:
       runs-on: ubuntu-latest
       steps:
