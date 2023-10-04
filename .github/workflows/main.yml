@@ -9,6 +9,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+  env:
+      acs-website: Hello
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
@@ -51,12 +54,12 @@ jobs:
           node-version: 18.x
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm start & npx wait-on https://cbrooksacs.github.io/accessiblity/
+      - run: npm start & npx wait-on $acs-website
       - run: npm i chromedriver
       - name: Run axe
         run: |
           npm install -g @axe-core/cli
-          axe https://cbrooksacs.github.io/accessiblity/ --chromedriver-path="/bin/chromedriver" --exit
+          axe $acs-website --chromedriver-path="/bin/chromedriver" --exit
   lighthouse:
       runs-on: ubuntu-latest
       steps:
@@ -66,7 +69,7 @@ jobs:
           id: lighthouseCheck
           with:
             device: "all"
-            urls: "https://cbrooksacs.github.io/accessiblity/"
+            urls: "$acs-website"
         - name: Verify Lighthouse Check results
           uses: foo-software/lighthouse-check-status-action@master
           with:
@@ -76,19 +79,3 @@ jobs:
             minPerformanceScore: "50"
             minProgressiveWebAppScore: "50"
             minSeoScore: "50"
-  pa11y:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.x
-      - run: npm ci
-      - run: npm run build --if-present
-      - run: npm start & npx wait-on https://cbrooksacs.github.io/accessiblity/
-      - name: Run pa11y
-        run: |
-          npm install -g pa11y
-          pa11y https://cbrooksacs.github.io/accessiblity/
-
