@@ -61,12 +61,13 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
+        - run: mkdir -p ${{ github.workspace }}/tmp/artifacts
         - name: Lighthouse
           uses: foo-software/lighthouse-check-action@master
           id: lighthouseCheck
-          inputs:
-            device: "all"
           with:
+            device: "all"
+            outputDirectory: ${{ github.workspace }}/tmp/artifacts
             urls: "https://cbrooksacs.github.io/accessiblity/"
         - name: Verify Lighthouse Check results
           uses: foo-software/lighthouse-check-status-action@master
