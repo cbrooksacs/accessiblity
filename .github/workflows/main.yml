@@ -51,12 +51,12 @@ jobs:
           node-version: 18.x
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm start & npx wait-on ACS_ORG
+      - run: npm start & npx wait-on ${{ ${{ ACS_ORG }} }}
       - run: npm i chromedriver
       - name: Run axe
         run: |
           npm install -g @axe-core/cli
-          axe ACS_ORG --chromedriver-path="/bin/chromedriver" --exit
+          axe ${{ ACS_ORG }} --chromedriver-path="/bin/chromedriver" --exit
   lighthouse:
       runs-on: ubuntu-latest
       steps:
@@ -66,7 +66,7 @@ jobs:
           id: lighthouseCheck
           with:
             device: "all"
-            urls: "ACS_ORG"
+            urls: "${{ ACS_ORG }}"
         - name: Verify Lighthouse Check results
           uses: foo-software/lighthouse-check-status-action@master
           with:
