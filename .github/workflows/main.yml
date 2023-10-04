@@ -69,6 +69,7 @@ jobs:
         - name: Verify Lighthouse Check results
           uses: foo-software/lighthouse-check-status-action@master
           with:
+            device: "all"
             lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
             minAccessibilityScore: "90"
             minBestPracticesScore: "50"
