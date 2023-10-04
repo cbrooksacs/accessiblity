@@ -58,14 +58,20 @@ jobs:
           npm install -g @axe-core/cli
           axe https://cbrooksacs.github.io/accessiblity/ --chromedriver-path="/bin/chromedriver" --exit
   Lighthouse:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
       steps:
-      - name: Audit live URL
-        uses: jakejarvis/lighthouse-action@master
-        with:
-          url: 'https://cbrooksacs.github.io/accessiblity/'
-      - name: Upload results as an artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: report
-          path: './report'
+        - uses: actions/checkout@master
+        - name: Lighthouse
+          uses: foo-software/lighthouse-check-action@master
+          id: lighthouseCheck
+          with:
+            urls: 'https://cbrooksacs.github.io/accessiblity/'
+        - name: Verify Lighthouse Check results
+          uses: foo-software/lighthouse-check-status-action@master
+          with:
+            lighthouseCheckResults: ${{ steps.lighthouseCheck.outputs.lighthouseCheckResults }}
+            minAccessibilityScore: "90"
+            minBestPracticesScore: "50"
+            minPerformanceScore: "50"
+            minProgressiveWebAppScore: "50"
+            minSeoScore: "50"
