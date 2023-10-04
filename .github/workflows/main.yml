@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  ACS_WEBSITE: https://www.acs.org/
+  ${{ env.ACS_WEBSITE }} : https://www.acs.org/
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -53,12 +53,12 @@ jobs:
           node-version: 18.x
       - run: npm ci
       - run: npm run build --if-present
-      - run: npm start & npx wait-on "echo $ACS_WEBSITE"
+      - run: npm start & npx wait-on ${{ env.ACS_WEBSITE }}
       - run: npm i chromedriver
       - name: Run axe
         run: |
           npm install -g @axe-core/cli
-          axe "echo $ACS_WEBSITE" --chromedriver-path="/bin/chromedriver" --exit
+          axe "${{ env.ACS_WEBSITE }} --chromedriver-path="/bin/chromedriver" --exit
   lighthouse:
       runs-on: ubuntu-latest
       steps:
@@ -68,7 +68,7 @@ jobs:
           id: lighthouseCheck
           with:
             device: "all"
-            urls: "$ACS_WEBSITE"
+            urls: "${{ env.ACS_WEBSITE }}"
         - name: Verify Lighthouse Check results
           uses: foo-software/lighthouse-check-status-action@master
           with:
