@@ -2,12 +2,14 @@
 name: Deploy and Test for accessibility
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+env:
+    acs-website: https://www.acs.org/
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -23,8 +25,6 @@ concurrency:
 
 jobs:
   # Single deploy job since we're just deploying
-  env:
-    acs-website: https://www.acs.org/
   deploy:
     environment:
       name: github-pages
