@@ -58,7 +58,7 @@ jobs:
           npm install -g @axe-core/cli
           axe https://cbrooksacs.github.io/accessiblity/ --chromedriver-path="/bin/chromedriver" --exit
   Lighthouse:
-    runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@master
         - name: Lighthouse
