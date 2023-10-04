@@ -76,12 +76,19 @@ jobs:
             minPerformanceScore: "50"
             minProgressiveWebAppScore: "50"
             minSeoScore: "50"
-  pa11y-webhint:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v3
-        - name: a11ytester
-          uses: mikaelvesavuori/a11ytester-action@v1.0.0
-          with:
-            urls: '[\"https://www.acs.org\"]'
+  pa11y:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm start & npx wait-on https://cbrooksacs.github.io/accessiblity/
+      - name: Run pa11y
+        run: |
+          npm install -g pa11y
+          pa11y https://cbrooksacs.github.io/accessiblity/
+
